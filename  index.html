@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIAC — Institutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blanc: #F9F7F4;
+    --beige: #E8E0D0;
+    --beige-fonce: #C9BAA0;
+    --bleu: #1A3A5C;
+    --bleu-moyen: #2B5A8A;
+    --bleu-clair: #4A7FB5;
+    --bleu-pale: #D6E4F0;
+    --or: #B8963E;
+    --texte: #2A2A2A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanc);
+    color: var(--texte);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 72px;
+    background: rgba(249,247,244,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--beige);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--bleu);
+  }
+  .nav-logo span { color: var(--or); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bleu);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--bleu-clair); }
+  .nav-cta {
+    background: var(--bleu);
+    color: var(--blanc) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 2px;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: var(--bleu-moyen) !important; color: var(--blanc) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+    background: linear-gradient(135deg, var(--blanc) 0%, var(--beige) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--bleu-pale) 0%, transparent 70%);
+    opacity: 0.6;
+  }
+  .hero-text {
+    padding: 6rem 3rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .hero-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--or);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.2rem;
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--bleu);
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--bleu-clair);
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #666;
+    margin: 1.5rem 0 2.5rem;
+    line-height: 1.7;
+    max-width: 420px;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--bleu);
+    color: var(--blanc);
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .2s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--bleu-moyen); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--bleu);
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--bleu);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+  }
+  .btn-secondary:hover { background: var(--bleu); color: var(--blanc); }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem;
+    position: relative;
+  }
+  .journal-cover {
+    width: 260px;
+    background: var(--bleu);
+    box-shadow: 24px 24px 60px rgba(26,58,92,0.3), -4px -4px 20px rgba(255,255,255,0.8);
+    border-radius: 2px;
+    position: relative;
+    aspect-ratio: 0.71;
+    overflow: hidden;
+    transform: rotate(-2deg);
+    transition: transform .3s;
+  }
+  .journal-cover:hover { transform: rotate(0deg) scale(1.02); }
+  .cover-top {
+    background: var(--bleu);
+    padding: 2rem 1.8rem 1rem;
+  }
+  .cover-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--beige-fonce);
+    margin-bottom: 0.5rem;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+  }
+  .cover-title span { color: var(--or); }
+  .cover-divider {
+    height: 2px;
+    background: var(--or);
+    margin: 1rem 0;
+    width: 40px;
+  }
+  .cover-issue {
+    font-size: 0.65rem;
+    color: var(--beige);
+    letter-spacing: 0.1em;
+  }
+  .cover-body {
+    background: var(--blanc);
+    flex: 1;
+    padding: 1.2rem 1.8rem;
+  }
+  .cover-theme {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--bleu);
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+  .cover-articles {
+    font-size: 0.58rem;
+    color: #888;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+  .cover-footer {
+    background: var(--beige);
+    padding: 0.8rem 1.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cover-footer-text {
+    font-size: 0.55rem;
+    color: var(--bleu);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cover-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--bleu);
+  }
+
+  .hero-stats {
+    position: absolute; bottom: 3rem; left: 4rem;
+    display: flex; gap: 3rem;
+  }
+  .stat { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--bleu);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION STYLES ── */
+  section { padding: 6rem 4rem; }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--beige);
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--bleu);
+    line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--bleu-clair); }
+  .section-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bleu-clair);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: gap .2s;
+    white-space: nowrap;
+  }
+  .section-link:hover { gap: 0.9rem; }
+
+  /* ── REVUE ── */
+  #revue { background: var(--blanc); }
+  .revue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .issue-card {
+    border: 1px solid var(--beige);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow .3s, transform .3s;
+    background: white;
+  }
+  .issue-card:hover {
+    box-shadow: 0 12px 40px rgba(26,58,92,0.12);
+    transform: translateY(-4px);
+  }
+  .issue-card-img {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .issue-card:nth-child(1) .issue-card-img { background: var(--bleu); }
+  .issue-card:nth-child(2) .issue-card-img { background: var(--bleu-moyen); }
+  .issue-card:nth-child(3) .issue-card-img { background: var(--bleu-clair); }
+  .issue-card-img span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  .issue-card-body { padding: 1.4rem; }
+  .issue-num {
+    font-size: 0.65rem;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .issue-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--bleu);
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+  }
+  .issue-desc {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .issue-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--beige);
+  }
+  .issue-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--bleu);
+  }
+  .btn-small {
+    background: var(--bleu);
+    color: white;
+    padding: 0.45rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-small:hover { background: var(--bleu-moyen); }
+
+  /* Abonnement */
+  .abonnement-box {
+    background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-moyen) 100%);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .abo-item {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .abo-item:hover { background: rgba(255,255,255,0.12); }
+  .abo-item.featured {
+    background: rgba(255,255,255,0.15);
+    border-color: var(--or);
+  }
+  .abo-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.5rem;
+  }
+  .abo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 0.3rem;
+  }
+  .abo-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+  }
+  .abo-period {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1rem;
+  }
+  .abo-features {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 2;
+    list-style: none;
+    margin-bottom: 1.2rem;
+  }
+  .abo-features li::before { content: '✓  '; color: var(--or); }
+  .btn-abo {
+    width: 100%;
+    background: var(--or);
+    color: white;
+    padding: 0.7rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-abo:hover { opacity: 0.85; }
+  .btn-abo-outline {
+    width: 100%;
+    background: transparent;
+    color: white;
+    padding: 0.7rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3); cursor: pointer;
+    transition: border-color .2s;
+  }
+  .btn-abo-outline:hover { border-color: white; }
+
+  /* ── VIDÉOS ── */
+  #videos { background: var(--beige); }
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+  }
+  .video-card {
+    background: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow .3s, transform .3s;
+  }
+  .video-card:hover {
+    box-shadow: 0 16px 48px rgba(26,58,92,0.15);
+    transform: translateY(-4px);
+  }
+  .video-thumb {
+    position: relative;
+    height: 180px;
+    background: var(--bleu);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.5) 100%);
+  }
+  .play-btn {
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+    transition: transform .2s, background .2s;
+  }
+  .play-btn::after {
+    content: '';
+    border-style: solid;
+    border-width: 9px 0 9px 16px;
+    border-color: transparent transparent transparent var(--bleu);
+    margin-left: 3px;
+  }
+  .video-card:hover .play-btn {
+    transform: scale(1.1);
+    background: var(--or);
+  }
+  .video-card:hover .play-btn::after {
+    border-color: transparent transparent transparent white;
+  }
+  .video-date-tag {
+    position: absolute; bottom: 0.7rem; right: 0.7rem;
+    background: var(--or);
+    color: white;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .video-body { padding: 1.2rem 1.4rem; }
+  .video-category {
+    font-size: 0.65rem;
+    color: var(--bleu-clair);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .video-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--bleu);
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+  }
+  .video-meta {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.72rem;
+    color: #aaa;
+  }
+  .video-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+  /* ── COLLOQUES MAP ── */
+  #colloques { background: var(--blanc); }
+  .colloques-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 2.5rem;
+    min-height: 520px;
+  }
+  .colloque-list {
+    display: flex; flex-direction: column; gap: 0.8rem;
+    overflow-y: auto; max-height: 520px;
+    padding-right: 0.5rem;
+  }
+  .colloque-list::-webkit-scrollbar { width: 3px; }
+  .colloque-list::-webkit-scrollbar-track { background: var(--beige); }
+  .colloque-list::-webkit-scrollbar-thumb { background: var(--bleu-clair); }
+  .colloque-item {
+    border: 1px solid var(--beige);
+    padding: 1.2rem 1.4rem;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    background: white;
+  }
+  .colloque-item:hover, .colloque-item.active {
+    border-color: var(--bleu-clair);
+    background: var(--bleu-pale);
+  }
+  .colloque-date-badge {
+    display: inline-flex;
+    background: var(--bleu);
+    color: white;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .colloque-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--bleu);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .colloque-lieu {
+    font-size: 0.75rem;
+    color: #888;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .colloque-lieu::before { content: '📍'; font-size: 0.7rem; }
+  .colloque-tag {
+    display: inline-block;
+    background: var(--beige);
+    color: var(--bleu-moyen);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.6rem;
+  }
+
+  .map-container {
+    background: var(--bleu-pale);
+    border: 1px solid var(--beige);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    min-height: 520px;
+  }
+  .map-placeholder {
+    width: 100%; height: 100%;
+    position: relative;
+    background: linear-gradient(160deg, #dce9f5 0%, #c5d9ee 50%, #b8d0e8 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Faux fond de carte stylisé */
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,58,92,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,58,92,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  /* Routes simulées */
+  .map-road {
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+  }
+  .road-h1 { top: 35%; left: 0; right: 0; height: 3px; transform: rotate(-2deg); }
+  .road-h2 { top: 62%; left: 0; right: 0; height: 2px; transform: rotate(1deg); }
+  .road-v1 { left: 30%; top: 0; bottom: 0; width: 2px; transform: rotate(1deg); }
+  .road-v2 { left: 65%; top: 0; bottom: 0; width: 3px; transform: rotate(-1.5deg); }
+  .road-diag { top: 20%; left: 40%; width: 200px; height: 2px; transform: rotate(30deg); background: rgba(255,255,255,0.5); }
+
+  /* Markers */
+  .map-pin {
+    position: absolute;
+    display: flex; flex-direction: column; align-items: center;
+    cursor: pointer;
+    transition: transform .2s;
+  }
+  .map-pin:hover { transform: scale(1.1) translateY(-4px); }
+  .pin-dot {
+    width: 14px; height: 14px;
+    background: var(--bleu);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(26,58,92,0.4);
+    position: relative;
+    z-index: 2;
+  }
+  .pin-dot.featured { background: var(--or); width: 18px; height: 18px; }
+  .pin-stem {
+    width: 2px; height: 14px;
+    background: var(--bleu);
+    margin-top: -1px;
+  }
+  .pin-stem.featured { background: var(--or); }
+  .pin-label {
+    background: white;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--bleu);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    margin-top: 4px;
+    border-left: 2px solid var(--bleu);
+  }
+  .pin-label.featured { border-color: var(--or); color: var(--or); }
+
+  /* Pin 1 Paris */
+  .pin-paris { top: 38%; left: 48%; }
+  /* Pin 2 Lyon */
+  .pin-lyon { top: 55%; left: 52%; }
+  /* Pin 3 Bordeaux */
+  .pin-bordeaux { top: 58%; left: 30%; }
+  /* Pin 4 Strasbourg */
+  .pin-strasbourg { top: 28%; left: 72%; }
+  /* Pin 5 Toulouse */
+  .pin-toulouse { top: 68%; left: 38%; }
+
+  .map-legend {
+    position: absolute; bottom: 1.2rem; right: 1.2rem;
+    background: rgba(255,255,255,0.95);
+    padding: 0.8rem 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    font-size: 0.7rem;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: var(--bleu);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--bleu);
+    flex-shrink: 0;
+  }
+  .legend-dot.gold { background: var(--or); }
+
+  /* Popup info */
+  .map-popup {
+    position: absolute; top: 1.5rem; left: 1.5rem;
+    background: white;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    max-width: 220px;
+    border-top: 3px solid var(--bleu);
+  }
+  .popup-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.4rem;
+  }
+  .popup-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--bleu);
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .popup-details {
+    font-size: 0.68rem;
+    color: #888;
+    line-height: 1.7;
+  }
+  .popup-btn {
+    margin-top: 0.8rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bleu-clair);
+    background: none; border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bleu);
+    color: rgba(255,255,255,0.7);
+    padding: 4rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.8rem;
+  }
+  .footer-brand span { color: var(--or); }
+  .footer-desc {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    max-width: 280px;
+  }
+  .footer-col-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">FIAC<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#revue">La Revue</a></li>
+    <li><a href="#videos">Événements</a></li>
+    <li><a href="#colloques">Colloques 2026</a></li>
+    <li><a href="#revue" class="nav-cta">S'abonner</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-label fade-up delay-1">Institutions</div>
+    <h1 class="fade-up delay-2">
+      FIAC<br>
+      <em>Fédération Interassociations Culturelles</em>
+    </h1>
+    <p class="hero-subtitle fade-up delay-3">
+      La revue de référence mettant en lien les praticiens des associations culturelles — recherche, clinique et transmission.
+    </p>
+    <div class="hero-actions fade-up delay-4">
+      <a href="#revue" class="btn-primary">Découvrir la revue</a>
+      <a href="#colloques" class="btn-secondary">Événements 2026</a>
+    </div>
+  </div>
+  <div class="hero-visual fade-up delay-2">
+    <div class="journal-cover">
+      <div class="cover-top">
+        <div class="cover-label">Revue trimestrielle</div>
+        <div class="cover-title">FIAC<span>.</span></div>
+        <div class="cover-divider"></div>
+        <div class="cover-issue">N°42 — Printemps 2025</div>
+      </div>
+      <div class="cover-body">
+        <div class="cover-theme">« Le transfert institutionnel dans la clinique contemporaine »</div>
+        <div class="cover-articles">
+          — Psychanalyse et Institution<br>
+          — La parole en collectif<br>
+          — Supervisions : enjeux actuels<br>
+          — Entretien avec J.-M. Vion
+        </div>
+      </div>
+      <div class="cover-footer">
+        <span class="cover-footer-text">FIAC Éditions</span>
+        <span class="cover-price">15 €</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat fade-up delay-3">
+      <div class="stat-num">42</div>
+      <div class="stat-label">Numéros publiés</div>
+    </div>
+    <div class="stat fade-up delay-4">
+      <div class="stat-num">1 200+</div>
+      <div class="stat-label">Praticiens abonnés</div>
+    </div>
+    <div class="stat fade-up delay-4">
+      <div class="stat-num">30 ans</div>
+      <div class="stat-label">D'existence</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVUE -->
+<section id="revue">
+  <div class="section-header">
+    <div>
+      <div class="section-label">La revue</div>
+      <h2 class="section-title">Nos dernières <em>parutions</em></h2>
+    </div>
+    <a href="#" class="section-link">Voir tous les numéros →</a>
+  </div>
+
+  <div class="revue-grid">
+    <div class="issue-card">
+      <div class="issue-card-img"><span>FIAC</span></div>
+      <div class="issue-card-body">
+        <div class="issue-num">N°42 — Printemps 2025</div>
+        <div class="issue-title">Le transfert institutionnel dans la clinique contemporaine</div>
+        <div class="issue-desc">Une exploration approfondie des dynamiques de transfert au sein des institutions soignantes et éducatives.</div>
+        <div class="issue-footer">
+          <span class="issue-price">15 €</span>
+          <button class="btn-small">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="issue-card">
+      <div class="issue-card-img"><span>FIAC</span></div>
+      <div class="issue-card-body">
+        <div class="issue-num">N°41 — Hiver 2024</div>
+        <div class="issue-title">Corps, espace et institution — nouvelles cliniques</div>
+        <div class="issue-desc">Comment la dimension spatiale de l'institution affecte-t-elle la pratique thérapeutique et éducative ?</div>
+        <div class="issue-footer">
+          <span class="issue-price">15 €</span>
+          <button class="btn-small">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="issue-card">
+      <div class="issue-card-img"><span>FIAC</span></div>
+      <div class="issue-card-body">
+        <div class="issue-num">N°40 — Automne 2024</div>
+        <div class="issue-title">Transmission et filiation dans les équipes soignantes</div>
+        <div class="issue-desc">Les enjeux de la transmission clinique entre générations de praticiens institutionnels.</div>
+        <div class="issue-footer">
+          <span class="issue-price">15 €</span>
+          <button class="btn-small">Commander</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="abonnement-box">
+    <div class="abo-item">
+      <div class="abo-badge">Numéro seul</div>
+      <div class="abo-name">À l'unité</div>
+      <div class="abo-price">15 €</div>
+      <div class="abo-period">par numéro</div>
+      <ul class="abo-features">
+        <li>1 numéro au choix</li>
+        <li>PDF inclus</li>
+        <li>Livraison offerte</li>
+      </ul>
+      <button class="btn-abo-outline">Commander</button>
+    </div>
+    <div class="abo-item featured">
+      <div class="abo-badge">⭐ Recommandé</div>
+      <div class="abo-name">Abonnement annuel</div>
+      <div class="abo-price">55 €</div>
+      <div class="abo-period">/ an — 4 numéros</div>
+      <ul class="abo-features">
+        <li>4 numéros par an</li>
+        <li>Accès archives en ligne</li>
+        <li>PDF haute qualité</li>
+        <li>Tarif préférentiel colloques</li>
+      </ul>
+      <button class="btn-abo">S'abonner</button>
+    </div>
+    <div class="abo-item">
+      <div class="abo-badge">Institutions</div>
+      <div class="abo-name">Abonnement Pro</div>
+      <div class="abo-price">120 €</div>
+      <div class="abo-period">/ an — jusqu'à 5 lecteurs</div>
+      <ul class="abo-features">
+        <li>5 accès nominatifs</li>
+        <li>Archives complètes</li>
+        <li>Accès colloques réduit</li>
+        <li>Facturation institution</li>
+      </ul>
+      <button class="btn-abo-outline">Contacter</button>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Événements passés</div>
+      <h2 class="section-title">Vidéos des <em>journées 2025</em></h2>
+    </div>
+    <a href="#" class="section-link">Voir la chaîne YouTube →</a>
+  </div>
+
+  <div class="videos-grid">
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #1A3A5C, #2B5A8A);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Mars 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Journée d'étude — Paris</div>
+        <div class="video-title">La désinstitutionnalisation psychiatrique : quelles alternatives ?</div>
+        <div class="video-meta">
+          <span>🕐 1h42</span>
+          <span>👁 3 400 vues</span>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #2B5A8A, #4A7FB5);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Mai 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Colloque — Lyon</div>
+        <div class="video-title">Psychothérapie institutionnelle : héritages et renouveau</div>
+        <div class="video-meta">
+          <span>🕐 2h10</span>
+          <span>👁 2 180 vues</span>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #4A7FB5, #1A3A5C);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Sept. 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Séminaire — Bordeaux</div>
+        <div class="video-title">L'autogestion dans les équipes soignantes en psychiatrie</div>
+        <div class="video-meta">
+          <span>🕐 58 min</span>
+          <span>👁 1 750 vues</span>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #1A3A5C, #4A7FB5);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Oct. 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Table ronde — Strasbourg</div>
+        <div class="video-title">Prise en charge globale et logique institutionnelle</div>
+        <div class="video-meta">
+          <span>🕐 1h25</span>
+          <span>👁 980 vues</span>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #2B5A8A, #1A3A5C);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Nov. 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Conférence — Toulouse</div>
+        <div class="video-title">Le groupe comme outil thérapeutique en institution</div>
+        <div class="video-meta">
+          <span>🕐 1h15</span>
+          <span>👁 2 050 vues</span>
+        </div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" style="background: linear-gradient(135deg, #4A7FB5, #2B5A8A);">
+        <div class="play-btn"></div>
+        <div class="video-date-tag">Déc. 2025</div>
+      </div>
+      <div class="video-body">
+        <div class="video-category">Journée nationale — Paris</div>
+        <div class="video-title">Bilan et perspectives de la FIAC — Assemblée générale 2025</div>
+        <div class="video-meta">
+          <span>🕐 3h00</span>
+          <span>👁 4 600 vues</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLOQUES 2026 -->
+<section id="colloques">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Agenda 2026</div>
+      <h2 class="section-title">Colloques & <em>séminaires à venir</em></h2>
+    </div>
+    <a href="#" class="section-link">S'inscrire à un événement →</a>
+  </div>
+
+  <div class="colloques-layout">
+    <!-- Liste -->
+    <div class="colloque-list">
+
+      <div class="colloque-item active">
+        <span class="colloque-date-badge">14–15 Mars 2026</span>
+        <div class="colloque-title">Journée nationale FIAC — Institution et lien social</div>
+        <div class="colloque-lieu">Paris — Cité Internationale Universitaire</div>
+        <span class="colloque-tag">Colloque national</span>
+      </div>
+
+      <div class="colloque-item">
+        <span class="colloque-date-badge">22 Avril 2026</span>
+        <div class="colloque-title">Séminaire : Clinique du sujet en milieu contraint</div>
+        <div class="colloque-lieu">Lyon — Maison de la Psychologie</div>
+        <span class="colloque-tag">Séminaire régional</span>
+      </div>
+
+      <div class="colloque-item">
+        <span class="colloque-date-badge">10 Mai 2026</span>
+        <div class="colloque-title">Atelier pratique : Supervision et contre-transfert institutionnel</div>
+        <div class="colloque-lieu">Bordeaux — Centre Hospitalier Charles-Perrens</div>
+        <span class="colloque-tag">Atelier pratique</span>
+      </div>
+
+      <div class="colloque-item">
+        <span class="colloque-date-badge">19–20 Juin 2026</span>
+        <div class="colloque-title">Colloque franco-belge : Psychiatrie et droits des patients</div>
+        <div class="colloque-lieu">Strasbourg — Palais Universitaire</div>
+        <span class="colloque-tag">Colloque international</span>
+      </div>
+
+      <div class="colloque-item">
+        <span class="colloque-date-badge">17 Sept. 2026</span>
+        <div class="colloque-title">Journée d'étude : Adolescence et institution éducative</div>
+        <div class="colloque-lieu">Toulouse — Institut Catholique</div>
+        <span class="colloque-tag">Journée d'étude</span>
+      </div>
+
+    </div>
+
+    <!-- Carte -->
+    <div class="map-container">
+      <div class="map-placeholder">
+        <div class="map-grid"></div>
+        <div class="map-road road-h1"></div>
+        <div class="map-road road-h2"></div>
+        <div class="map-road road-v1"></div>
+        <div class="map-road road-v2"></div>
+        <div class="map-road road-diag"></div>
+
+        <!-- Pins -->
+        <div class="map-pin pin-paris">
+          <div class="pin-dot featured"></div>
+          <div class="pin-stem featured"></div>
+          <div class="pin-label featured">Paris — 14 mars</div>
+        </div>
+        <div class="map-pin pin-lyon">
+          <div class="pin-dot"></div>
+          <div class="pin-stem"></div>
+          <div class="pin-label">Lyon — 22 avr.</div>
+        </div>
+        <div class="map-pin pin-bordeaux">
+          <div class="pin-dot"></div>
+          <div class="pin-stem"></div>
+          <div class="pin-label">Bordeaux — 10 mai</div>
+        </div>
+        <div class="map-pin pin-strasbourg">
+          <div class="pin-dot"></div>
+          <div class="pin-stem"></div>
+          <div class="pin-label">Strasbourg — 19 juin</div>
+        </div>
+        <div class="map-pin pin-toulouse">
+          <div class="pin-dot"></div>
+          <div class="pin-stem"></div>
+          <div class="pin-label">Toulouse — 17 sept.</div>
+        </div>
+
+        <!-- Popup -->
+        <div class="map-popup">
+          <div class="popup-tag">⭐ Prochain événement</div>
+          <div class="popup-title">Journée nationale FIAC<br>Institution et lien social</div>
+          <div class="popup-details">
+            📅 14–15 Mars 2026<br>
+            📍 Paris — Cité Internationale Universitaire<br>
+            👥 Places limitées — inscription ouverte
+          </div>
+          <button class="popup-btn">S'inscrire maintenant →</button>
+        </div>
+
+        <!-- Légende -->
+        <div class="map-legend">
+          <div class="legend-item">
+            <div class="legend-dot gold"></div>
+            Événement national
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot"></div>
+            Séminaire / Colloque
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">FIAC<span>.</span></div>
+      <p class="footer-desc">
+        Fédération Interassociations Culturelles — revue trimestrielle <em>Institutions</em> depuis 1994. Lieu de rencontre et d'échange pour les praticiens.
+      </p>
+    </div>
+    <div>
+      <div class="footer-col-title">La Revue</div>
+      <ul class="footer-links">
+        <li><a href="#">Numéros disponibles</a></li>
+        <li><a href="#">Archives en ligne</a></li>
+        <li><a href="#">S'abonner</a></li>
+        <li><a href="#">Soumettre un article</a></li>
+        <li><a href="#">Comité de lecture</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Événements</div>
+      <ul class="footer-links">
+        <li><a href="#">Colloques 2026</a></li>
+        <li><a href="#">Vidéos 2025</a></li>
+        <li><a href="#">Programme complet</a></li>
+        <li><a href="#">Appel à communications</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">La FIAC</div>
+      <ul class="footer-links">
+        <li><a href="#">Qui sommes-nous ?</a></li>
+        <li><a href="#">Rejoindre le réseau</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Mentions légales</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 FIAC — Fédération Interassociations Culturelles. Tous droits réservés.</span>
+    <span>ISSN 1234-5678</span>
+  </div>
+</footer>
+
+<script>
+  // Interaction colloque list
+  document.querySelectorAll('.colloque-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.colloque-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Intersection observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeUp 0.6s ease forwards';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.issue-card, .video-card, .colloque-item, .abo-item').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
